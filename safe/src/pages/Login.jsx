@@ -76,7 +76,12 @@ const Login = () => {
                 .getPatient()
                 .call()
                 .then(async (res) => {
+                    // const tmp = await (await fetch("http://localhost:8080/ipfs/QmRUSAkwqGUH1asFAW2VskDED5MHFBwVY5JqjWi3cMefXv")).json();
+                    // console.log(tmp);
                     for (let i = res.length - 1; i >= 0; i--) {
+                        if (res[i] === "" || res[i] === null) {
+                            continue;
+                        }
                         const data = await (await fetch(`http://localhost:8080/ipfs/${res[i]}`)).json();
                         if (!vis.includes(data.mail)) {
                             vis.push(data.mail);

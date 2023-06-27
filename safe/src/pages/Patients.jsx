@@ -25,6 +25,9 @@ const Patients = () => {
                 .then(async (res) => {
                     console.log(res);
                     for (let i = res.length - 1; i >= 0; i--) {
+                        if (res[i] === "" || res[i] === null) {
+                            continue;
+                        }
                         const data = await (await fetch(`http://localhost:8080/ipfs/${res[i]}`)).json()
                         const selected = data.selectedDoctors;
                         if (!vis.includes(data.mail)) {
